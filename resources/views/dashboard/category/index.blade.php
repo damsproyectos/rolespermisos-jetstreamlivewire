@@ -30,17 +30,22 @@
                         {{ $c->title }}
                     </td>
                     <td>
+                        {{-- @can('editor.category.show') --}}
                         <a class="btn btn-success mt-2" href="{{ route('category.show', $c) }}">Show</a>
+                        {{-- @endcan --}}
+
                         {{-- @can('editor.category.update') --}}
                             <a class="btn btn-success mt-2" href="{{ route('category.edit', $c) }}">Edit</a>
                         {{-- @endcan --}}
-                        {{-- @can('editor.category.destroy') --}}
+
                             <form action="{{ route('category.destroy', $c) }}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-danger mt-2" type="submit">Delete</button>
+
+                                {{-- @can('editor.category.destroy') --}}
+                                    <button class="btn btn-danger mt-2" type="submit">Delete</button>
+                                {{-- @endcan --}}
                             </form>
-                        {{-- @endcan --}}
                     </td>
                 </tr>
             @endforeach

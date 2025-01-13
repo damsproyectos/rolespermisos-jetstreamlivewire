@@ -2,7 +2,9 @@
 
 @section('content')
 
-    <a class="btn btn-primary my-3" href="{{ route('role.create') }}" target="blank">Create</a>
+    {{-- @can('editor.role.create') --}}
+        <a class="btn btn-primary my-3" href="{{ route('role.create') }}" target="blank">Create</a>
+    {{-- @endcan --}}
 
     <table class="table">
         <thead>
@@ -17,7 +19,7 @@
                     Options
                 </th>
             </tr>
-            
+
         </thead>
         <tbody>
             @foreach ($roles as $r)
@@ -29,12 +31,21 @@
                         {{ $r->name }}
                     </td>
                     <td>
-                        <a class="btn btn-success mt-2" href="{{ route('role.show',$r) }}">Show</a>
-                        <a class="btn btn-success mt-2" href="{{ route('role.edit',$r) }}">Edit</a>
+                        {{-- @can('editor.role.show') --}}
+                            <a class="btn btn-success mt-2" href="{{ route('role.show',$r) }}">Show</a>
+                        {{-- @endcan --}}
+
+                        {{-- @can('editor.role.update') --}}
+                            <a class="btn btn-success mt-2" href="{{ route('role.edit',$r) }}">Edit</a>
+                        {{-- @endcan --}}
+
                         <form action="{{ route('role.destroy', $r) }}" method="post">
                             @method('DELETE')
                             @csrf
-                            <button class="btn btn-danger mt-2" type="submit">Delete</button>
+
+                            {{-- @can('editor.role.destroy') --}}
+                                <button class="btn btn-danger mt-2" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            {{-- @endcan --}}
                         </form>
                     </td>
                 </tr>

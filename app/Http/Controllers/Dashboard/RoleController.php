@@ -13,7 +13,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        // Gate::authorize('is-admin');
+        Gate::authorize('is-admin');
         $roles = Role::paginate(10);
         return view('dashboard/role/index', compact('roles'));
     }

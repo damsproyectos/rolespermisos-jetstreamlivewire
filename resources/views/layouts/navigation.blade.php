@@ -95,6 +95,19 @@
                     </div>
                 @endif
 
+
+                <!-- Authentication -->
+
+                <!-- Authentication  jetstream-->
+                <form method="POST" action="{{ route('logout') }}" x-data>
+                    @csrf
+                    <button type="submit" class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100">
+                        {{ __('Log Out') }}
+                    </button>
+                </form>
+
+
+
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
@@ -134,7 +147,7 @@
 
                             <div class="border-t border-gray-200"></div>
 
-                            <!-- Authentication Jetstream-->
+                            <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
@@ -146,6 +159,7 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
+
             </div>
 
             <!-- Hamburger -->
@@ -165,6 +179,36 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('post.index') }}" :active="request()->routeIs('post.index')">
+                {{ __('Post') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.index')">
+                {{ __('Category') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.index')">
+                {{ __('Role') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('permission.index') }}" :active="request()->routeIs('permission.index')">
+                {{ __('Permission') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
+                {{ __('User') }}
             </x-responsive-nav-link>
         </div>
 

@@ -29,10 +29,10 @@
 
             <!-- Page Content -->
             <main>
-             
-        
+
+
                 <div class="container mx-auto">
-                    
+
                     @if (session('status'))
                         <div class="card card-success my-3">
                             {{ session('status') }}

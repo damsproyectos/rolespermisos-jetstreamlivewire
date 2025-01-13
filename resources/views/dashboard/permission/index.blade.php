@@ -2,7 +2,9 @@
 
 @section('content')
 
-    <a class="btn btn-primary my-3" href="{{ route('permission.create') }}" target="blank">Create</a>
+    @can('editor.permission.create')
+        <a class="btn btn-primary my-3" href="{{ route('permission.create') }}" target="blank">Create</a>
+    @endcan
 
     <table class="table">
         <thead>
@@ -17,7 +19,7 @@
                     Options
                 </th>
             </tr>
-            
+
         </thead>
         <tbody>
             @foreach ($permissions as $p)
@@ -29,12 +31,21 @@
                         {{ $p->name }}
                     </td>
                     <td>
-                        <a class="btn btn-success mt-2" href="{{ route('permission.show',$p) }}">Show</a>
-                        <a class="btn btn-success mt-2" href="{{ route('permission.edit',$p) }}">Edit</a>
+                        @can('editor.permission.show')
+                            <a class="btn btn-success mt-2" href="{{ route('permission.show',$p) }}">Show</a>
+                        @endcan
+
+                        @can('editor.permission.update')
+                            <a class="btn btn-success mt-2" href="{{ route('permission.edit',$p) }}">Edit</a>
+                        @endcan
+
                         <form action="{{ route('permission.destroy', $p) }}" method="post">
                             @method('DELETE')
                             @csrf
-                            <button class="btn btn-danger mt-2" type="submit">Delete</button>
+
+                            @can('editor.permission.destroy')
+                                <button class="btn btn-danger mt-2" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            @endcan
                         </form>
                     </td>
                 </tr>

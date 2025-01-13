@@ -42,17 +42,21 @@
                         {{ $u->rol }}
                     </td>
                     <td>
-                        <a class="btn btn-success mt-2" href="{{ route('user.show', $u) }}">Show</a>
+                        {{-- @can('editor.user.show') --}}
+                            <a class="btn btn-success mt-2" href="{{ route('user.show', $u) }}">Show</a>
+                        {{-- @endcan --}}
+
                         {{-- @can('editor.user.update') --}}
                             <a class="btn btn-success mt-2" href="{{ route('user.edit', $u) }}">Edit</a>
                         {{-- @endcan --}}
-                        {{-- @can('editor.user.destroy') --}}
+
                             <form action="{{ route('user.destroy', $u) }}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-danger mt-2" type="submit">Delete</button>
+                                {{-- @can('editor.user.destroy') --}}
+                                    <button class="btn btn-danger mt-2" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                                {{-- @endcan --}}
                             </form>
-                        {{-- @endcan --}}
                     </td>
                 </tr>
             @endforeach

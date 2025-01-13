@@ -65,6 +65,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        if(!auth()->user()->hasPermissionTo('editor.post.show')){
+            return abort(403);
+        }
+
         return view('dashboard/post/show', ['post' => $post]);
     }
 

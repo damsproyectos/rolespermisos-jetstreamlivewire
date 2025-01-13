@@ -2,9 +2,9 @@
 
 @section('content')
 
-    {{-- @can('editor.post.create') --}}
+    @can('editor.post.create')
         <a class="btn btn-primary my-3" href="{{ route('post.create') }}" target="blank">Create</a>
-    {{-- @endcan --}}
+    @endcan
     <table class="table">
         <thead>
             <tr>
@@ -42,18 +42,23 @@
                         {{ $p->category->title }}
                     </td>
                     <td>
-                        <a class="btn btn-success mt-2" href="{{ route('post.show',$p) }}">Show</a>
+                        @can('editor.post.show')
+                            <a class="btn btn-success mt-2" href="{{ route('post.show',$p) }}">Show</a>
+                        @endcan
 
-                        {{-- @can('editor.post.update') --}}
+                        @can('editor.post.update')
                             <a class="btn btn-success mt-2" href="{{ route('post.edit',$p) }}">Edit</a>
-                        {{-- @endcan --}}
-                        {{-- @can('editor.post.destroy') --}}
+                        @endcan
+
                         <form action="{{ route('post.destroy', $p) }}" method="post">
                             @method('DELETE')
                             @csrf
-                            <button class="btn btn-danger mt-2" type="submit">Delete</button>
+
+                            @can('editor.post.destroy')
+                                <button class="btn btn-danger mt-2" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            @endcan
                         </form>
-                        {{-- @endcan --}}
+
                     </td>
                 </tr>
             @endforeach
